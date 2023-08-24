@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" asp-href-include="~/css/Home/Login.css"/>
+	<title>@ViewData["Title"] Login</title>
+	<partial name="_headscripts" />
+</head>
+<body>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+	<partial name="_bodyscripts" />
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
