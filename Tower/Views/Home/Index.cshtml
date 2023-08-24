@@ -2,7 +2,9 @@
     ViewData["Title"] = "Home Page";
     var Pessoas = ViewBag.Pessoas as List<Pessoa>;
 }
-<table class="table">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" asp-append-version="true" />
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+<table class="table" name="tableClientes" id="tableClientes">
     <colgroup>
         <col style="width:auto" />
         <col style="width:auto" />
@@ -15,13 +17,17 @@
         <col style="width:8%" />
     </colgroup>
     <thead>
+
         <tr>
             <th>ID</th>
             <th>Nome</th>
             <th>CPF</th>
             <th>Tipo</th>
             <th>Empresa</th>
-            <th colspan="4"><a class="btn btn-success btncadastro" asp-action="Add" asp-controller="Pessoas">Cadastrar</a></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><a class="btn btn-success btncadastro" asp-action="Add" asp-controller="Pessoas">Cadastrar</a></th>
         </tr>
     </thead>
     <tbody>
@@ -41,3 +47,4 @@
         }
     </tbody>
 </table>
+<script src="~/js/Home/Index.js" asp-append-version="true"></script>
