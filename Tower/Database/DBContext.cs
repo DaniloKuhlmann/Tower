@@ -43,7 +43,7 @@ public class BDContext : DbContext
 	public BDContext(DbContextOptions<BDContext> options) : base(options)
 	{
 	}
-	public virtual DbSet<User> Usuario { get; set; }
+	public virtual DbSet<User> Usuarios { get; set; }
 	public virtual DbSet<Pessoa> Pessoas { get; set; }
 	public virtual DbSet<Acesso> Acessos { get; set; }
 }

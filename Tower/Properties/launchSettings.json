@@ -13,10 +13,16 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DataBase-User": "root",
+        "DataBase-Address": "localhost",
+        "DataBase-Database": "Tower",
+        "DataBase-Password": "root"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7099;http://localhost:5200"
+      "applicationUrl": "https://localhost:7099;http://localhost:5200",
+      "nativeDebugging": false,
+      "hotReloadEnabled": true
     },
     "IIS Express": {
       "commandName": "IISExpress",

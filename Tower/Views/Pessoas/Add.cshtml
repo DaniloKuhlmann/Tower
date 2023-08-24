@@ -1,0 +1,37 @@
+﻿@{
+}
+@model Pessoa
+
+<form id="form" class="box" asp-action="Add" method="post">
+    @Html.AntiForgeryToken()
+    <div class="row g-3 ">
+        <div class="col-sm-8">
+            <label for="Nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" asp-for="Nome" required>
+        </div>
+        <div class="col-sm-4">
+            <label for="CPF" class="form-label">CPF</label>
+            <input type="text" class="form-control" asp-for="CPF" required data-cpf>
+        </div>
+        <div class="col-sm-8">
+            <label for="Empresa" class="form-label">Empresa</label>
+            <input type="text" class="form-control" asp-for="Empresa">
+        </div>
+        <div class="col-sm-4">
+            <label for="Tipo" class="form-label">Tipo</label>
+            <select name="Tipo" class="form-control" asp-for="Tipo" required>
+                <option disabled selected>Selecione uma opção</option>
+                @foreach (var valores in Enum.GetValues(typeof(TipoFunc)))
+                {
+                    var valoresextension = (TipoFunc)valores;
+                    <!option>@(ExtensionsClass.GetEnumDisplayName(valoresextension))</!option>
+                }
+            </select>
+        </div>
+        <button class="btn btn-success " type="submit">Cadastrar</button>
+    </div>
+</form>
+<script src="/lib/jquery.mask/jquery.mask.min.js" asp-append-version="true"></script>
+<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/js/Pessoas/Add.js" asp-append-version="true"></script>
+<script src="/js/masks.js" asp-append-version="true"></script>

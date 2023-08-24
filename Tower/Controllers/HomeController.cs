@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Tower.Database;
 using Tower.Models;
 
 namespace Tower.Controllers;
@@ -14,6 +15,9 @@ public class HomeController : Controller
 
 	public IActionResult Index()
 	{
+		using var context = BDContext.Initialize();
+		var Pessoas = context.Pessoas.ToList();
+		ViewBag.Pessoas = Pessoas;
 		return View();
 	}
 

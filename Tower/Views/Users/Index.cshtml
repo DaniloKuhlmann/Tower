@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var users = ViewBag.Users as List<User>;
+}
+<table class="table table-striped">
+    <colgroup>
+        <col style="width:90%">
+        <col style="width:auto">
+        <col style="width:auto">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Usuário</th>
+            <th colspan="2"><a class="btn btn-success" asp-action="add">Cadastrar Usuário</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in users)
+        {
+            <tr>
+                <td>@user.Nome</td>
+                <td><button class="btn btn-secondary">Editar</button></td>
+                <td><button class="btn btn-danger">Excluir</button></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -20,6 +20,7 @@
     position: relative;
     display: grid;
     place-items: center;
+    background-color: lightgray;
 }
 
     .sign-box .div-dados {

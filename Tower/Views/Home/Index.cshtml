@@ -1,8 +1,43 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var Pessoas = ViewBag.Pessoas as List<Pessoa>;
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table class="table">
+    <colgroup>
+        <col style="width:auto" />
+        <col style="width:auto" />
+        <col style="width:auto" />
+        <col style="width:auto" />
+        <col style="width:auto" />
+        <col style="width:8%" />
+        <col style="width:8%" />
+        <col style="width:8%" />
+        <col style="width:8%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Tipo</th>
+            <th>Empresa</th>
+            <th colspan="4"><a class="btn btn-success btncadastro" asp-action="Add" asp-controller="Pessoas">Cadastrar</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var Pessoa in Pessoas)
+        {
+            <tr>
+                <td>@Pessoa.Id</td>
+                <td>@Pessoa.Nome</td>
+                <td>@Pessoa.CPF</td>
+                <td>@Pessoa.Tipo</td>
+                <td>@Pessoa.Empresa</td>
+                <td><button class="btn btn-success btncadastro">Detalhes</button></td>
+                <td><button class="btn btn-danger btncadastro">Editar</button></td>
+                <td><button class="btn btn-primary btncadastro">Registar Entrada</button></td>
+                <td><button class="btn btn-secondary btncadastro">Registrar Saida</button></td>
+            </tr>
+        }
+    </tbody>
+</table>

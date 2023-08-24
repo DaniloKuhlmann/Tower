@@ -38,7 +38,7 @@ public class SecurityClass
 	{
 		using var context = BDContext.Initialize();
 		var password = UserValidate.Password;
-		var user = context.Usuario.FirstOrDefault(p => p.Email == UserValidate.Email);
+		var user = context.Usuarios.FirstOrDefault(p => p.Email == UserValidate.Email);
 		if (user == null)
 		{
 			throw new Exception("Usuario incorreto");
