@@ -13,6 +13,7 @@
     <thead>
         <tr>
             <th>Usuário</th>
+            <th>Email</th>
             <th colspan="2"><a class="btn btn-success" asp-action="add">Cadastrar Usuário</a></th>
         </tr>
     </thead>
@@ -21,8 +22,7 @@
         {
             <tr>
                 <td>@user.Nome</td>
-                <td><button class="btn btn-secondary">Editar</button></td>
-                <td><button class="btn btn-danger">Excluir</button></td>
+                <td colspan="2">@user.Email</td>
             </tr>
         }
     </tbody>

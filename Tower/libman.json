@@ -5,12 +5,14 @@
     {
       "library": "bootstrap@5.3.1",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "jquery.mask@1.14.16",
+      "destination": "wwwroot/lib/jquery.mask/"
+    },
+    {
+      "library": "sweetalert2@11.7.27",
+      "destination": "wwwroot/lib/sweetalert2/"
     }
-  ,
-{
-  "provider": "cdnjs",
-  "library": "jquery.mask@1.14.16",
-  "destination": "wwwroot/lib/jquery.mask/"
-}
-]
+  ]
 }

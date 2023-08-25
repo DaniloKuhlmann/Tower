@@ -8,6 +8,6 @@ public class Acesso
 	[ForeignKey(nameof(Pessoa))]
 	public int PessoaID { get; set; }
 	public DateTime DataHoraEntrada { get; set; }
-	public DateTime DataHoraSaida { get; set; }
+	public DateTime? DataHoraSaida { get; set; }
 	public required Pessoa Pessoa { get; set; }
 }

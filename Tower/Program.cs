@@ -15,8 +15,8 @@ builder.Services.AddAuthorization(options =>
 });
 builder.Services.AddAuthentication().AddCookie(options =>
 {
-	options.LoginPath = "/Access/login";
-	options.AccessDeniedPath = "/Access/AccessDenied";
+	options.LoginPath = "/Users/login";
+	options.AccessDeniedPath = "/Users/AccessDenied";
 	options.Cookie.Name = ".AspNet.Sistema.SharedCookie";
 	options.Cookie.Path = "/";
 	options.Cookie.SecurePolicy = CookieSecurePolicy.Always;

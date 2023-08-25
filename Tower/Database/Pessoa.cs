@@ -20,6 +20,6 @@ public enum TipoFunc
 	Funcionario,
 	Visitante,
 	[Display(Name ="Prestador de Serviço")]
-	PrestadorServiço
+	PrestadorServico
 
 }

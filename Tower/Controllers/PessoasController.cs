@@ -35,9 +35,11 @@ public class PessoasController : Controller
             return RedirectToAction("Index", "Home");
         }
     }
-    public IActionResult Edit()
+    public IActionResult Edit(int id)
     {
-        return View();
+        using var context = BDContext.Initialize();
+        var Pessoa = context.Pessoas.First(x => x.Id==id);
+        return View(Pessoa);
     }
     [HttpPost]
     public IActionResult Edit(Pessoa pessoa)

@@ -26,25 +26,32 @@
             <th>Empresa</th>
             <th></th>
             <th></th>
-            <th></th>
             <th><a class="btn btn-success btncadastro" asp-action="Add" asp-controller="Pessoas">Cadastrar</a></th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var Pessoa in Pessoas)
+        @foreach (var Pessoa in Pessoas)
         {
+            var acesso = Pessoa.Acessos.LastOrDefault();
             <tr>
                 <td>@Pessoa.Id</td>
                 <td>@Pessoa.Nome</td>
                 <td>@Pessoa.CPF</td>
-                <td>@Pessoa.Tipo</td>
+                <td>@ExtensionsClass.GetEnumDisplayName(Pessoa.Tipo)</td>
                 <td>@Pessoa.Empresa</td>
-                <td><button class="btn btn-success btncadastro">Detalhes</button></td>
-                <td><button class="btn btn-danger btncadastro">Editar</button></td>
-                <td><button class="btn btn-primary btncadastro">Registar Entrada</button></td>
-                <td><button class="btn btn-secondary btncadastro">Registrar Saida</button></td>
+                <td><a class="btn btn-success btncadastro" asp-action="Index" asp-controller="Access" asp-route-id="@Pessoa.Id">Acessos</a></td>
+                <td><a class="btn btn-danger btncadastro" asp-action="Edit" asp-controller="Pessoas" asp-route-id="@Pessoa.Id">Editar</a></td>
+                @if (acesso == null || acesso.DataHoraSaida != null)
+                {
+                    <td><button class="btn btn-primary btncadastro" btnEntrada pessoaID="@Pessoa.Id">Registrar Entrada</button></td>
+                }
+                else
+                {
+                    <td><button class="btn btn-secondary btncadastro" btnSaida pessoaID="@Pessoa.Id">Registrar Saida</button></td>
+                }
             </tr>
         }
     </tbody>
 </table>
 <script src="~/js/Home/Index.js" asp-append-version="true"></script>
+<script src="/lib/sweetalert2/sweetalert2.all.min.js" asp-append-version="true"></script>

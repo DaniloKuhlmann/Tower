@@ -3,6 +3,7 @@
 @model Pessoa
 
 <form id="form" class="box" asp-action="Add" method="post">
+    <h3>Edição de Usuário</h3>
     @Html.AntiForgeryToken()
     <div class="row g-3 ">
         <div class="col-sm-8">
@@ -20,11 +21,11 @@
         <div class="col-sm-4">
             <label for="Tipo" class="form-label">Tipo</label>
             <select name="Tipo" class="form-control" asp-for="Tipo" required>
-                <option disabled selected>Selecione uma opção</option>
+                <option disabled>Selecione uma opção</option>
                 @foreach (var valores in Enum.GetValues(typeof(TipoFunc)))
                 {
                     var valoresextension = (TipoFunc)valores;
-                    <!option value="@valoresextension">@(ExtensionsClass.GetEnumDisplayName(valoresextension))</!option>
+                    <!option value="@valoresextension" @(Model.Tipo == valoresextension?"selected":"")>@(ExtensionsClass.GetEnumDisplayName(valoresextension))</!option>
                 }
             </select>
         </div>

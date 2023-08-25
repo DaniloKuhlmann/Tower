@@ -2,4 +2,30 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    var listaAcesso = ViewBag.Acesso as List<Acesso> ?? new List<Acesso>();
 }
+<table class="table table-striped">
+    <thread>
+        <tr>
+            <th>ID</th>
+            <th>ID Pessoa</th>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Entrada</th>
+            <th>Saída</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var acesso in listaAcesso)
+        {
+            <tr>
+                <td>@acesso.Id</td>
+                <td>@acesso.Pessoa.Id</td>
+                <td>@acesso.Pessoa.Nome</td>
+                <td>@ExtensionsClass.GetEnumDisplayName(acesso.Pessoa.Tipo)</td>
+                <td>@acesso.DataHoraEntrada.ToString()</td>
+                <td>@acesso.DataHoraSaida.ToString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
