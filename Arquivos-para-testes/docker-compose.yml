@@ -1,6 +1,16 @@
 version: "3.6"
 
 services:
+  Tower:
+    image: 3012881505/tower
+    ports:
+      - "36150:443"
+      - "36100:80"
+    environment:
+      - DataBase-User=root
+      - DataBase-Address=mysqldb
+      - DataBase-Database=Tower
+      - DataBase-Password=root  
   mysqldb:
     container_name: MYSQL
     image: mysql
