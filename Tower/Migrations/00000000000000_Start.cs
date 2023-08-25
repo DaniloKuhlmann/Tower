@@ -26,7 +26,7 @@ namespace Tower.Migrations
                     CPF = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Tipo = table.Column<int>(type: "int", nullable: false),
-                    Empresa = table.Column<string>(type: "longtext", nullable: false)
+                    Empresa = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -36,7 +36,7 @@ namespace Tower.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Usuario",
+                name: "Usuarios",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -50,7 +50,7 @@ namespace Tower.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -62,7 +62,7 @@ namespace Tower.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     PessoaID = table.Column<int>(type: "int", nullable: false),
                     DataHoraEntrada = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    DataHoraSaida = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    DataHoraSaida = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,8 +88,8 @@ namespace Tower.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuario_Email",
-                table: "Usuario",
+                name: "IX_Usuarios_Email",
+                table: "Usuarios",
                 column: "Email",
                 unique: true);
         }
@@ -101,7 +101,7 @@ namespace Tower.Migrations
                 name: "Acessos");
 
             migrationBuilder.DropTable(
-                name: "Usuario");
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Pessoas");

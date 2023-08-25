@@ -31,7 +31,7 @@ namespace Tower.Migrations
                     b.Property<DateTime>("DataHoraEntrada")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("DataHoraSaida")
+                    b.Property<DateTime?>("DataHoraSaida")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("PessoaID")
@@ -55,7 +55,6 @@ namespace Tower.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Empresa")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Nome")
@@ -96,7 +95,7 @@ namespace Tower.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Usuario");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Tower.Database.Acesso", b =>
