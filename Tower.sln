@@ -5,6 +5,11 @@ VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tower", "Tower\Tower.csproj", "{A09D520D-6129-475D-B3B8-40A526732431}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arquivos para teste", "Arquivos para teste", "{1A8D8BFB-B6CD-485E-931C-269DEC9DD0A6}"
+	ProjectSection(SolutionItems) = preProject
+		..\Sistema-Legado\docker-compose.yml = ..\Sistema-Legado\docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
