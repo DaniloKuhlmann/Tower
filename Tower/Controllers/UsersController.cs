@@ -140,8 +140,7 @@ public class UsersController : Controller
         {
             var url = TempData["ReturnURL"];
             TempData["ReturnURL"] = url;
-            var secury = new SecurityClass();
-            var (claims, authProperties) = secury.ValidateLogin(user);
+            var (claims, authProperties) = SecurityClass.ValidateLogin(user);
             var claimIdendity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(new ClaimsPrincipal(claimIdendity), authProperties);
             return url != null ? Redirect((string)url) : RedirectToAction("Index", "Home");
