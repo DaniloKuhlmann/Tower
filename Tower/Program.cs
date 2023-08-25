@@ -65,7 +65,6 @@ builder.Services.AddSwaggerGen(c =>
         Title = "API de consultas",
     });
 
-    // Define o esquema de seguran�a do token JWT
     var securySchema = new OpenApiSecurityScheme
     {
         Description = "Token de acesso, coloque no cabe�alho da chamada o token de acesso da mesma maneira que foi gerado na pagina",
