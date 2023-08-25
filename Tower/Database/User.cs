@@ -1,12 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tower.Database;
 [Index(nameof(Email), IsUnique = true)]
 
 public class User
 {
+    [Key]
 	public int Id { get; set; }
-	public required string Nome { get; set; }
-	public required string Email { get; set; }
-	public required string Password { get; set; }
+	[Required]
+	public string Nome { get; set; }
+    [Required]
+    public string Email { get; set; }
+    [Required]
+    public string Password { get; set; }
 }

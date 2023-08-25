@@ -38,7 +38,7 @@ namespace Tower.Migrations
 
                     b.HasIndex("PessoaID");
 
-                    b.ToTable("Acessos");
+                    b.ToTable("Acessos", (string)null);
                 });
 
             modelBuilder.Entity("Tower.Database.Pessoa", b =>
@@ -66,7 +66,7 @@ namespace Tower.Migrations
                     b.HasIndex("CPF")
                         .IsUnique();
 
-                    b.ToTable("Pessoas");
+                    b.ToTable("Pessoas", (string)null);
                 });
 
             modelBuilder.Entity("Tower.Database.User", b =>
@@ -92,7 +92,7 @@ namespace Tower.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("Tower.Database.Acesso", b =>

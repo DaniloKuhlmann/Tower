@@ -24,10 +24,12 @@
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.8" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters.Abstractions" Version="7.0.8" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="wwwroot\css\Access\" />
 		<Folder Include="wwwroot\js\Home\" />
 		<Folder Include="wwwroot\js\Pessoas\" />
 	</ItemGroup>

@@ -4,10 +4,18 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Diagnostics.Metrics;
 using System.Reflection;
+using System.Reflection.Metadata;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using Tower.Classes;
 using Tower.Database;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,99 +23,121 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorization(options =>
 {
-    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
+	options.FallbackPolicy = new AuthorizationPolicyBuilder()
+		.RequireAuthenticatedUser()
+		.Build();
+    JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+    {
+        Formatting = Newtonsoft.Json.Formatting.Indented,
+        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+    };
 });
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+	options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddAuthentication().AddCookie(options =>
 {
-    options.LoginPath = "/Users/login";
-    options.AccessDeniedPath = "/Users/AccessDenied";
-    options.Cookie.Name = ".AspNet.Sistema.SharedCookie";
-    options.Cookie.Path = "/";
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.Cookie.SameSite = SameSiteMode.Lax;
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+	options.LoginPath = "/Users/login";
+	options.AccessDeniedPath = "/Users/AccessDenied";
+	options.Cookie.Name = ".AspNet.Sistema.SharedCookie";
+	options.Cookie.Path = "/";
+	options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+	options.Cookie.SameSite = SameSiteMode.Lax;
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
 }).AddJwtBearer(x =>
 {
-    var key = SecurityClass.GenerateKey();
-    x.RequireHttpsMetadata = false;
-    x.SaveToken = true;
-    x.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key.Key),
-        ValidateIssuer = false,
-        ValidateAudience = false,
-    };
+	var AESKEY = SecurityClass.GenerateKey();
+	x.RequireHttpsMetadata = false;
+	x.SaveToken = true;
+	x.TokenValidationParameters = new TokenValidationParameters
+	{
+		ValidateIssuerSigningKey = true,
+		IssuerSigningKey = new SymmetricSecurityKey(AESKEY.Key),
+		ValidateIssuer = false,
+		ValidateAudience = false,
+	};
 });
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("JWT", policy =>
-    {
-        policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
-        policy.RequireAuthenticatedUser();
-    });
+	options.AddPolicy("JWT", policy =>
+	{
+		policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+		policy.RequireAuthenticatedUser();
+	});
 });
 builder.Services.AddSwaggerGen(c =>
 {
-    // Habilita a documenta��o de anota�oes do Swagger
-    c.EnableAnnotations();
+	c.EnableAnnotations();
+	c.SwaggerDoc("v1", new OpenApiInfo
+	{
+		Title = "API de consultas",
+	});
+	var securySchema = new OpenApiSecurityScheme
+	{
+		Description = "Token de acesso, coloque no cabeçalho da chamada o token de acesso da mesma maneira que foi gerado na pagina",
+		In = ParameterLocation.Header,
+		Type = SecuritySchemeType.ApiKey,
+		Name = "Authorization",
+		Reference = new OpenApiReference
+		{
+			Type = ReferenceType.SecurityScheme,
+			Id = "Authorization"
+		}
+	};
+	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+	{
+		Name = "Authorization",
+		Type = SecuritySchemeType.ApiKey,
+		Scheme = "Bearer",
+		BearerFormat = "JWT",
+		In = ParameterLocation.Header,
+		Description = "JWT Authorization header using the Bearer scheme.",
+	});
+	c.AddSecurityRequirement(new OpenApiSecurityRequirement
+				{
+					{
+						  new OpenApiSecurityScheme
+						  {
+							  Reference = new OpenApiReference
+							  {
+								  Type = ReferenceType.SecurityScheme,
+								  Id = "Bearer"
+							  }
+						  },
+						 new string[] {}
+					}
+				});
 
-    // Define a informa��o b�sica da API
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "API de consultas",
-    });
+	c.ResolveConflictingActions(x => x.First());
 
-    var securySchema = new OpenApiSecurityScheme
-    {
-        Description = "Token de acesso, coloque no cabe�alho da chamada o token de acesso da mesma maneira que foi gerado na pagina",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Name = "Token",
-        Reference = new OpenApiReference
-        {
-            Type = ReferenceType.SecurityScheme,
-            Id = "Token"
-        },
-    };
-    c.AddSecurityDefinition("Token", securySchema);
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                { securySchema, new[] { "Token" } }
-            });
+	c.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true);
 
-    // Configura��oo para evitar conflitos de rotas
-    c.ResolveConflictingActions(x => x.First());
-
-    // Habilita as anota��es para heran�a e polimorfismo
-    c.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true);
-
-    // Configura��o para incluir a documenta��o XML da API
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
+	var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+	c.IncludeXmlComments(xmlPath);
 });
 builder.Services.AddDbContext<BDContext>(
 dbContextOptions => dbContextOptions
-                .UseMySql(BDContext.DefaultConnection, ServerVersion.AutoDetect(BDContext.DefaultConnection))
-                .EnableDetailedErrors()
-        );
+				.UseMySql(BDContext.DefaultConnection, ServerVersion.AutoDetect(BDContext.DefaultConnection))
+				.EnableDetailedErrors()
+		);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -116,18 +146,18 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSwagger(c =>
 {
-    c.RouteTemplate = "swagger/{documentName}/swagger.json";
+	c.RouteTemplate = "swagger/{documentName}/swagger.json";
 });
 app.UseSwaggerUI(
-    options =>
-    {
-        options.DocumentTitle = "API de consulta";
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-    }
+	options =>
+	{
+		options.DocumentTitle = "API de consulta";
+		options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+	}
 );
 app.UseAuthorization();
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
