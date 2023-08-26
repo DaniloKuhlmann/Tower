@@ -11,6 +11,8 @@ As principais variaveis de ambiente já estão configurados.
    | DataBase-Address | mysqldb |
    | DataBase-Database | Tower |
    | DataBase-Password | root |
+
+   
 Depois de rodar o docker-compose, restaure a versão do banco de dados que se encontra na pasta.
 
 #### Ao iniciar o aplicativo, caso o banco de dados esteja vazio ele irá pedir para criar um usuário.
