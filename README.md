@@ -16,5 +16,5 @@ As principais variaveis de ambiente já estão configurados.
 Depois de rodar o docker-compose, restaure a versão do banco de dados que se encontra na pasta.
 
 #### Ao iniciar o aplicativo, caso o banco de dados esteja vazio ele irá pedir para criar um usuário.
-#### Foi utilizado o swagger para documentar e testar o endpois da API. o caminho possui o endereço exemplo. Caso suba uma a versao do docker-compose o caminha será http://localhost:36100/swagger/index.html.
+#### Foi utilizado o swagger para documentar e testar o endpoints da API. o caminho possui o endereço exemplo. Caso suba uma a versao do docker-compose o caminha será http://localhost:36100/swagger/index.html.
 #### Para acessar as funções do swagger é necessario gerar um chave bearer ma API, utilize o email e senha cadastrado ao iniciar o aplicativo.
