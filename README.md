@@ -1,7 +1,8 @@
 # Tower
 ## Testando a aplicação com o docker ##
 Instale o docker.
-com o docker instalado na maquina, dentro da pasta Arquivo para Testes, será possivel encontrar dois arquivo o docker-comopose e o SQL com a versão base do banco de dados.
+com o docker instalado na maquina, dentro da pasta Arquivo para Testes, será possivel encontrar dois arquivo o docker-comopose e o SQL com o script para importar na base de dados do banco de dados.
+O banco de dados é o MYSQL.
 Caso faça o teste utilizando o visual studio será necessario configurar as variaveis do aplicativo.
 As principais variaveis de ambiente já estão configurados.
 ### Segue um exemplo como no docker-compose.
