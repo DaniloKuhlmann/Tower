@@ -6,11 +6,11 @@ Caso faça o teste utilizando o visual studio será necessario configurar as var
 As principais variaveis de ambiente já estão configurados.
 ### Segue um exemplo como no docker-compose.
    | Variavel de ambiente | Valor | Descrição |
-   |---|---|
-   | DataBase-User | root | Senha do bando de dados
-   | DataBase-Address | mysqldb |Endereço do banco de dados
-   | DataBase-Database | Tower | Nome do database
-   | DataBase-Password | root |  senha do banco de dados
+   |---|---|---|
+   | DataBase-User | root | Senha do bando de dados |
+   | DataBase-Address | mysqldb |Endereço do banco de dados |
+   | DataBase-Database | Tower | Nome do database |
+   | DataBase-Password | root |  senha do banco de dados |
 
    
 Depois de rodar o docker-compose, restaure a versão do banco de dados que se encontra na pasta.
