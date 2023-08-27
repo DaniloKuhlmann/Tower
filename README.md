@@ -5,12 +5,12 @@ com o docker instalado na maquina, dentro da pasta Arquivo para Testes, será po
 Caso faça o teste utilizando o visual studio será necessario configurar as variaveis do aplicativo.
 As principais variaveis de ambiente já estão configurados.
 ### Segue um exemplo como no docker-compose.
-   | Variavel de ambiente | Valor |
+   | Variavel de ambiente | Valor | Descrição |
    |---|---|
-   | DataBase-User | root |
-   | DataBase-Address | mysqldb |
-   | DataBase-Database | Tower |
-   | DataBase-Password | root |
+   | DataBase-User | root | Senha do bando de dados
+   | DataBase-Address | mysqldb |Endereço do banco de dados
+   | DataBase-Database | Tower | Nome do database
+   | DataBase-Password | root |  senha do banco de dados
 
    
 Depois de rodar o docker-compose, restaure a versão do banco de dados que se encontra na pasta.
