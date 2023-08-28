@@ -8,7 +8,7 @@ As principais variaveis de ambiente já estão configurados.
 ### Segue um exemplo como no docker-compose.
    | Variavel de ambiente | Valor | Descrição |
    |---|---|---|
-   | DataBase-User | root | Senha do bando de dados |
+   | DataBase-User | root | usuário do bando de dados |
    | DataBase-Address | mysqldb |Endereço do banco de dados |
    | DataBase-Database | Tower | Nome do database |
    | DataBase-Password | root |  senha do banco de dados |
