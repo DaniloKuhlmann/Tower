@@ -18,4 +18,4 @@ As principais variaveis de ambiente já estão configurados.
 ##### Caso utilize o visual studio, depois de configurar as variaveis de ambiente, o comando do entity-framework (update-database) subira uma versão do database com o nome Tower
 #### Ao iniciar o aplicativo, caso o banco de dados esteja vazio, ele irá pedir para criar um usuário.
 #### Foi utilizado o swagger para documentar e testar o endpoints da API. o caminho possui o endereço exemplo. Caso suba uma a versao do docker-compose o caminho será: http://localhost:36100/swagger/index.html.
-#### Para acessar as funções do swagger é necessario gerar um chave bearer ma API, utilize o email e senha cadastrado ao iniciar o aplicativo.
+#### Para acessar as funções do swagger é necessario gerar um chave bearer na API, utilize o email e senha cadastrado ao iniciar o aplicativo.
