@@ -21,7 +21,6 @@ public class PessoasController : Controller
     /// <summary>
     /// Lista de todas as pessoas cadastradas
     /// </summary>
-    /// <param name="CPF"></param>	/// <returns></returns>
     [HttpGet]
     [Route("")]
     public IActionResult Index()
@@ -40,7 +39,7 @@ public class PessoasController : Controller
     /// <summary>
     /// Busca a pessoa por CPF
     /// </summary>
-    /// <param name="CPF"></param>
+    /// <param name="CPF">Digite apenas números</param>
     /// <returns></returns>
     [HttpGet]
     [Route("{CPF}")]

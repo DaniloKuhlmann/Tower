@@ -14,11 +14,21 @@ namespace Tower.API_Controllers;
 [AllowAnonymous]
 public class UsersController : Controller
 {
-    /// <summary>
-    /// Área de Login
-    /// </summary>
-    /// <returns></returns>
-    [HttpPost]
+	/// <summary>
+	/// Área de Login
+	/// </summary>
+	/// <returns></returns>
+	/// <remarks>
+	/// Exemplo de requisição:
+	///
+	///     POST
+	///     {
+	///        "email": "teste@teste",
+	///        "password": "12345",
+	///     }
+	///
+	/// </remarks>
+	[HttpPost]
     [Route("TokenGenerate")]
     public IActionResult TokenGenerate(UserAPI User)
     {

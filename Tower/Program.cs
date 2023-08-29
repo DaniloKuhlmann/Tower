@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Reflection.Metadata;
@@ -26,22 +27,22 @@ builder.Services.AddAuthorization(options =>
 	options.FallbackPolicy = new AuthorizationPolicyBuilder()
 		.RequireAuthenticatedUser()
 		.Build();
-    JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-    {
-        Formatting = Newtonsoft.Json.Formatting.Indented,
-        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-    };
+	JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+	{
+		Formatting = Newtonsoft.Json.Formatting.Indented,
+		ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+	};
 });
 builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+				x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddAuthentication(options =>
 {
 	options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
 builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+	.AddJsonOptions(options =>
+		options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddAuthentication().AddCookie(options =>
 {
 	options.LoginPath = "/Users/login";
@@ -80,6 +81,8 @@ builder.Services.AddSwaggerGen(c =>
 	{
 		Title = "API de consultas",
 	});
+	c.CustomSchemaIds(x => x.GetCustomAttributes<DisplayNameAttribute>().SingleOrDefault()?.DisplayName??x.Name);
+
 	var securySchema = new OpenApiSecurityScheme
 	{
 		Description = "Token de acesso, coloque no cabeçalho da chamada o token de acesso da mesma maneira que foi gerado na pagina",

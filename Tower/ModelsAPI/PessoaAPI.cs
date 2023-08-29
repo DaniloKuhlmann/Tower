@@ -1,12 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using Tower.Classes;
 using Tower.Database;
 
 namespace Tower.ModelsAPI;
-
+/// <summary>
+/// Dados da pessoa a ser cadastrada
+/// </summary>
+[DisplayName("Pessoa")]
 public class PessoaAPI : Pessoa
 {
+	/// <summary>
+	/// CPF do visitante, digite apenas números
+	/// </summary>
 	public string CPF { 
 		get 
 		{
@@ -31,7 +39,7 @@ public class PessoaAPI : Pessoa
 			base.Tipo = ExtensionsClass.GetEnumValueFromDisplayName<TipoFunc>(value);
 		}
 	}
-	[JsonIgnore]
+	[Microsoft.AspNetCore.Mvc.BindProperty]
 	private new int Id { get; }
 	[JsonIgnore]
 	private new List<Acesso>? Acessos { get;}
