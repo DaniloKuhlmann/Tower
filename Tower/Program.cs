@@ -129,7 +129,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddDbContext<BDContext>(
 dbContextOptions => dbContextOptions
-				.UseMySql(BDContext.DefaultConnection, ServerVersion.AutoDetect(BDContext.DefaultConnection))
+				.UseMySql(BDContext.VariablesConnection.RetornoConnection(), ServerVersion.AutoDetect(BDContext.VariablesConnection.RetornoConnection()))
 				.EnableDetailedErrors()
 		);
 

@@ -33,4 +33,7 @@
 		<Folder Include="wwwroot\js\Home\" />
 		<Folder Include="wwwroot\js\Pessoas\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
 </Project>

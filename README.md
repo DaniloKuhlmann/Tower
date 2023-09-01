@@ -13,7 +13,9 @@ As principais variaveis de ambiente já estão configurados.
    | DataBase-Database | Tower | Nome do database |
    | DataBase-Password | root |  senha do banco de dados |
 
-   
+## A unit-test cria um banco de dados "Tower-UnitTest" utilizando a classe CleanClass.CS, se for utilizar algum banco de dados para teste que não seja local, as configurações podem ser alteradas nele ##
+
+
 ##### Depois de rodar o docker-compose, restaure a versão do banco de dados que se encontra na pasta.
 ##### Caso utilize o visual studio, depois de configurar as variaveis de ambiente, o comando do entity-framework (update-database) subira uma versão do database com o nome Tower
 #### Ao iniciar o aplicativo, caso o banco de dados esteja vazio, ele irá pedir para criar um usuário.
