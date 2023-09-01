@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TowerTests.Classes;
 using Tower.Classes;
 using Tower.Database;
+using System.Text.RegularExpressions;
 
 namespace Tower.DBModels.Tests;
 
@@ -21,10 +22,14 @@ public class AccessClassTests
 		var PessoasRegistrada = new PessoasClass().CadastraPessoa(new Database.Pessoa
 		{
 			Nome = "Teste",
-			CPF = "333.3333.333-33",
+			CPF = "3333333333ds33",
 			Empresa = "Teste",
 			Tipo = ExtensionsClass.GetEnumValueFromDisplayName<Database.TipoFunc>("Visitante"),
 		});
+		var sequencia = "333dsa333ds333333333aaa333sssd33";
+		var sq2 = Regex.Replace(sequencia, @"\D", "")[..11];
+		var teste = Regex.Replace(sq2, @"(\w{3})(\w{3})(\w{3})(\w{2})", @"$1.$2.$3-$4");
+
 		var acesso = AccessClass.RegistrarEntrada(PessoasRegistrada.Id);
 		var Context = BDContext.Initialize();
 		var Acesso = Context.Acessos.Where(x => x.PessoaID == PessoasRegistrada.Id).ToList().Last();

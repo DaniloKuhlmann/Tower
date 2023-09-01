@@ -11,7 +11,7 @@ public class AccessClass
         {
             using var context = BDContext.Initialize();
             var Pessoa = context.Pessoas.Where(x => x.Id == PessoaID).Include(x => x.Acessos).First();
-            var acesso = Pessoa.Acessos.LastOrDefault();
+            var acesso = Pessoa.Acessos?.LastOrDefault();
             if (acesso == null || acesso.DataHoraSaida!=null)
             {
                 throw new Exception("Pessoa não possui entrada registrada");
@@ -31,7 +31,7 @@ public class AccessClass
         {
             using var context = BDContext.Initialize();
             var Pessoa = context.Pessoas.Where(x => x.Id == PessoaID).Include(x => x.Acessos).First();
-            var acesso = Pessoa.Acessos.LastOrDefault();
+            var acesso = Pessoa.Acessos?.LastOrDefault();
             if (acesso != null && acesso.DataHoraSaida == null)
             {
                 throw new Exception("Pessoa possui entrada, porem não possui saída registrada");

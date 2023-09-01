@@ -1,4 +1,6 @@
-﻿using Tower.Classes;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Text.RegularExpressions;
+using Tower.Classes;
 using Tower.Database;
 
 namespace Tower.DBModels;
@@ -10,7 +12,8 @@ public class PessoasClass
 		try
 		{			
 			using var context = BDContext.Initialize();
-			if(context.Pessoas.Any(x=>x.CPF == Pessoa.CPF))
+			Pessoa.CPF = RegexExtensions.CPFFormat(Pessoa.CPF);
+			if (context.Pessoas.Any(x=>x.CPF == Pessoa.CPF))
 			{
 				throw new Exception("CPF já cadastrado")
 				{
@@ -31,7 +34,8 @@ public class PessoasClass
         try
         {
             using var context = BDContext.Initialize();
-            if (context.Pessoas.Any(x => x.CPF == pessoa.CPF && x.Id!= pessoa.Id))
+			pessoa.CPF = RegexExtensions.CPFFormat(pessoa.CPF);
+			if (context.Pessoas.Any(x => x.CPF == pessoa.CPF && x.Id!= pessoa.Id))
             {
                 throw new Exception("CPF já cadastrado")
                 {
