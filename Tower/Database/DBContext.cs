@@ -31,7 +31,10 @@ public class BDContext : DbContext
 		var Password = Environment.GetEnvironmentVariable("DataBase-Password");
 		var UserID = Environment.GetEnvironmentVariable("DataBase-User");
 		var Server = Environment.GetEnvironmentVariable("DataBase-Address");
-		VariablesConnection.SetDataBase(Server,Password, DataBase, UserID);
+		if (DataBase != null)
+		{
+			VariablesConnection.SetDataBase(Server, Password, DataBase, UserID);
+		}
 	}
 	/// <summary>
 	/// Classe de conexão com o banco de dados
